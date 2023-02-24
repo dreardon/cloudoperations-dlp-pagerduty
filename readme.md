@@ -43,7 +43,10 @@ gcloud secrets create pagerduty_token \
 
 ## Cloud Function and Monitoring Channel with Associated PubSub Topic
 ```
-#Note: Sometimes you may get an error executing the below if you try this command within a few seconds of creating a new project. The error will state: "If the topic's project was recently created, you may need to wait a few minutes for the project's organization policy to be properly initialized, and then retry this operation."
+# Note: Sometimes you may get an error executing the below if you try this command within 
+# a few seconds of creating a new project. The error will state: "If the topic's project was 
+# recently created, you may need to wait a few minutes for the project's organization policy 
+# to be properly initialized, and then retry this operation."
 
 gcloud pubsub topics create $PUBSUB_TOPIC
 
@@ -64,7 +67,8 @@ gcloud beta monitoring channels create \
 --channel-labels=topic=projects/$PROJECT_NUMBER/topics/$PUBSUB_TOPIC \
 --project=$PROJECT_ID
 
-notification_channel=$(gcloud beta monitoring channels list --filter='displayName:"PagerDuty PubSub"' --format='value(name)')
+notification_channel=$(gcloud beta monitoring channels list \
+--filter='displayName:"PagerDuty PubSub"' --format='value(name)')
 
 gcloud pubsub topics add-iam-policy-binding \
 projects/$PROJECT_NUMBER/topics/$PUBSUB_TOPIC --role=roles/pubsub.publisher \
@@ -85,12 +89,16 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 sed -i "s/PLACEHOLDER_PROJECT_ID/$PROJECT_ID/g" example_alert_policy.json 
 
 #Create the alerting policy and attach it to the notification previously created
-gcloud alpha monitoring policies create --policy-from-file="example_alert_policy.json" --notification-channels=$notification_channel
+gcloud alpha monitoring policies create \
+--policy-from-file="example_alert_policy.json" \
+--notification-channels=$notification_channel
 ```
 
 ## Example Execution and Results
 ```
-gcloud logging write --severity=CRITICAL --payload-type=json custom_web_app_log '{"message":{"type":"permissions_change","action":"admin_access_grant","email":"danreardon@gmail.com","role":"Web Application Admin"}}'
+gcloud logging write --severity=CRITICAL \
+--payload-type=json custom_web_app_log \
+'{"message":{"type":"permissions_change","action":"admin_access_grant","email":"danreardon@gmail.com","role":"Web Application Admin"}}'
 ```
 The alert surfaced in PagerDuty after the Cloud Function called the PagerDuty API.
 

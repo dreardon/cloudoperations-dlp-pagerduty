@@ -1,0 +1,27 @@
+{
+    "displayName": "Admin Grant Alert",
+    "documentation": {
+      "content": "Log-based alert in project ${project} detected a secret being accessed by a non-service account or an admin access grant.",
+      "mimeType": "text/markdown"
+    },
+  
+    "conditions": [
+      {
+        "displayName": "Admin Grant Alert",
+        "conditionMatchedLog": {
+          "filter": "(log_name=\"projects/PLACEHOLDER_PROJECT_ID/logs/custom_web_app_log\" severity=CRITICAL json_payload.message.action=\"admin_access_grant\")",
+          "labelExtractors": {
+              "user_impacted": "EXTRACT(jsonPayload.message.email)"
+          }
+        }
+      }
+    ],
+    "combiner": "OR",
+  
+    "alertStrategy": {
+      "notificationRateLimit": {
+        "period": "300s"
+      },
+      "autoClose": "1800s"
+    }
+  }

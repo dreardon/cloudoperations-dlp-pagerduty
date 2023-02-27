@@ -83,7 +83,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 --member=serviceAccount:$PROJECT_ID@appspot.gserviceaccount.com
 ```
 
-## Create an Alerting Policy	
+## Example Alerting Policy	
 ```
 #Use this command to replace the project id in the example alerting policy
 sed -i "s/PLACEHOLDER_PROJECT_ID/$PROJECT_ID/g" example_alert_policy.json 

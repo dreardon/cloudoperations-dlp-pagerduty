@@ -62,7 +62,7 @@ gcloud functions deploy pager_duty_function \
 
 gcloud beta monitoring channels create \
 --display-name="PagerDuty PubSub" \
---description="Pager Duty PubSub and Cleaning Functions" \
+--description="PagerDuty PubSub and Cleaning Functions" \
 --type=pubsub \
 --channel-labels=topic=projects/$PROJECT_NUMBER/topics/$PUBSUB_TOPIC \
 --project=$PROJECT_ID

@@ -1,4 +1,4 @@
-# Cleanse Google Cloud Operations Alerts to PagerDuty
+# Send Cleansed Google Cloud Operations Alerts to PagerDuty
 Data protection and security have become a top priority for businesses. Organizations of all sizes are striving to implement the best practices and tools to safeguard their sensitive data from unauthorized exposure. Google Cloud Operations Alerts, Data Loss Prevention, and PagerDuty are three such tools that help businesses securely monitor and respond to incidents in real-time. 
 
 Google Cloud Operations Suite already has an existing integration with PagerDuty and the instructions for implementing "Option 1" below can be found in the [Google Documentation](https://cloud.google.com/monitoring/support/notification-options#pagerduty)
